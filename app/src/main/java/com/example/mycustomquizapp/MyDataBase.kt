@@ -73,6 +73,13 @@ class MyDataBase(context: Context) : SQLiteOpenHelper(context, "MyCustomApp", nu
         cv.put("CORRECT_ANSWER",quiz.correct_answer)
         db.update("QUIZ",cv,"QUIZID=" + quiz.id.toString(),null)
         Toast.makeText(context, quiz.id.toString(), Toast.LENGTH_SHORT).show()
+    }
 
+    fun numberofQuestions(): Int {
+        val query = "SELECT count(*) FROM QUIZ"
+        val db = this.writableDatabase
+        val cursor = db.rawQuery(query, null)
+        cursor.moveToFirst() //run the query, return the result, cursor move to the first row
+        return cursor.getInt(0)
     }
 }

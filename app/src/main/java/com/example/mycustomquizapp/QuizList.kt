@@ -11,10 +11,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import kotlinx.android.synthetic.main.activity_create_quiz.*
 
 class QuizList : AppCompatActivity() {
-
-    var quizobj: Quiz = Quiz()
 
     private lateinit var mDatabase: MyDataBase
     private lateinit var questionslist: RecyclerView
@@ -56,8 +55,6 @@ class QuizList : AppCompatActivity() {
         showDialog(list)
     }
 
-
-
     fun showDialog(list: Quiz) {
         var quiz: Quiz = list
         val dialog = BottomSheetDialog(this)
@@ -78,16 +75,35 @@ class QuizList : AppCompatActivity() {
 //        Toast.makeText(this, list.id.toString(), Toast.LENGTH_SHORT).show()
 
         btnUpload?.setOnClickListener {
-            quiz.questions = setup_question?.text.toString()
-            quiz.option_one = fake_answer1?.text.toString()
-            quiz.option_two = fake_answer2?.text.toString()
-            quiz.option_three = fake_answer3?.text.toString()
-            quiz.correct_answer = correct_answer?.text.toString()
+            if (fake_answer1?.text.toString() != correct_answer?.text.toString()) {
+//                Toast.makeText(this, "Ensure Answer same with Option Above", Toast.LENGTH_SHORT)
+//                    .show()
+//                Toast.makeText(this, fake_answer1.text.toString(), Toast.LENGTH_SHORT).show()
+                if (fake_answer2?.text.toString() != correct_answer?.text.toString()) {
+
+                    if (fake_answer3?.text.toString() != correct_answer?.text.toString()) {
+                        Toast.makeText(
+                            this,
+                            "Ensure Answer same with Option Above",
+                            Toast.LENGTH_SHORT
+                        )
+                            .show()
+                    }
+                }
+            }
+
+            if (fake_answer1?.text.toString() == correct_answer?.text.toString() || fake_answer2?.text.toString() == correct_answer?.text.toString() || fake_answer3?.text.toString() == correct_answer?.text.toString()) {
+                quiz.questions = setup_question?.text.toString()
+                quiz.option_one = fake_answer1?.text.toString()
+                quiz.option_two = fake_answer2?.text.toString()
+                quiz.option_three = fake_answer3?.text.toString()
+                quiz.correct_answer = correct_answer?.text.toString()
 //            Toast.makeText(this, quiz.id.toString(), Toast.LENGTH_SHORT).show()
-            mDatabase.updateQuestions(this, quiz)
-            //Toast.makeText(this, quiz.questions, Toast.LENGTH_SHORT).show()
-            finish()
-            startActivity(intent)
+                mDatabase.updateQuestions(this, quiz)
+                //Toast.makeText(this, quiz.questions, Toast.LENGTH_SHORT).show()
+                finish()
+                startActivity(intent)
+            }
         }
         dialog.show()
     }
