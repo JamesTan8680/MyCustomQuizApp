@@ -19,6 +19,10 @@ class MyDataBase(context: Context) : SQLiteOpenHelper(context, "MyCustomApp", nu
             "INSERT INTO QUIZ(QUESTIONS,OPTION_ONE,OPTION_TWO,OPTION_THREE,CORRECT_ANSWER) VALUES ('How old is Malaysia','53 years old', '55 years old', '70 years old'," +
                     "'53 years old')"
         )
+//        db?.execSQL(
+//            "INSERT INTO QUIZ(QUESTIONS,OPTION_ONE,OPTION_TWO,OPTION_THREE,CORRECT_ANSWER) VALUES ('How many legs does a spider have','Eight', 'Seven', 'Six'," +
+//                    "'Eight')"
+//        )
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {

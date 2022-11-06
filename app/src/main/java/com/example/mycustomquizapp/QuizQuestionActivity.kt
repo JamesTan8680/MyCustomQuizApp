@@ -66,15 +66,29 @@ class QuizQuestionActivity : AppCompatActivity() {
             if (btn_submit.text == "Submit") {
 
                 if(mQuestionList!!.size == 1) {
+                    if(mQuestionList!![i].correct_answer != setOptionValue) {
+                        ansView(mSelectedOptionPosition, R.drawable.wrong_option_bg)
 
-                    ansView(mSelectedOptionPosition, R.drawable.wrong_option_bg)
-
-                    when (mQuestionList!![i].correct_answer) {
-                        mQuestionList!![i].option_one -> ansView(1, R.drawable.correct_option_bg)
-                        mQuestionList!![i].option_two -> ansView(2, R.drawable.correct_option_bg)
-                        mQuestionList!![i].option_three -> ansView(3, R.drawable.correct_option_bg)
+                        when (mQuestionList!![i].correct_answer) {
+                            mQuestionList!![i].option_one -> ansView(
+                                1,
+                                R.drawable.correct_option_bg
+                            )
+                            mQuestionList!![i].option_two -> ansView(
+                                2,
+                                R.drawable.correct_option_bg
+                            )
+                            mQuestionList!![i].option_three -> ansView(
+                                3,
+                                R.drawable.correct_option_bg
+                            )
+                        }
+                    }else{
+                        mCorrectAnswers++
+                        ansView(mSelectedOptionPosition, R.drawable.correct_option_bg) //if no answer is select, will show the correct ans
                     }
                 }
+
 
                 if(mCurrentPosition == mQuestionList!!.size){
                     btn_submit.text = "FINISH"
